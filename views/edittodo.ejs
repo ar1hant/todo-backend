@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>
+      <%= title %>
+    </title>
+    <link rel="stylesheet" href="/css/home.css">
+  </head>
+  <body>
+    <h1 id = "page-heading">Contact List</h1>
+    <div class = "list">
+        <% for(let i of todoTasks) { %>
+          <% if (i._id == idTask) { %>
+          <div class="todo-list-item">
+            <form action="/update-contact/?id=<%= i._id %>" method="POST">
+                <input type="text" value="<%= i.name %>" name="name" required>
+                <button type="submit">Confirm</button>
+                <button><a href="/" class="cancel">Cancel</a></button>
+            </form>
+          </div>
+          <% } else { %>
+            <div>
+              <div class="p-elements">
+              <p><%= i.name %></p>
+              </div>
+              <div class="edit">
+                  <a href="/update-contact/?id=<%= i._id %>">
+                      <i><button>edit</button></i>
+                  </a>
+              </div>
+              <div class="delete">
+                  <a href="/delete-contact/?id=<%= i._id %>">
+                      <i><button>del</button></i>
+                  </a>
+              </div>
+            </div>
+          <% } %>
+        <% } %>
+    </div>
+    <form action="/create-contact" method="POST">
+      <input type="text" name="name" placeholder="Enter Name" required>
+      <button type="submit">Add</button>
+    </form>
+
+    <script type="text/javascript" src="/js/home.js"></script>
+  </body>
+</html>
