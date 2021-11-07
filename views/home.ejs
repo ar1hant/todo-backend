@@ -6,20 +6,21 @@
     <link rel="stylesheet" href="/css/home.css">
   </head>
   <body>
-    <h1 id = "page-heading">Contact List</h1>
-    <div class = "list">
-        <% for(let i of contact_list) { %>
+    <h1 id = "page-heading"><%= title %></h1>
+    <% if(currUserEmail != '') {%>
+      <div class = "list">
+        <% for(let i of todo_list) { %>
           <% if(i.createdby == currUserEmail) {%>
           <div class="details">
             <p><%= i.name %></p>
             <span>
               <div class="edit">
-                <a href="/update-contact/?id=<%= i._id %>">
+                <a href="/update-todo/?id=<%= i._id %>">
                     <i><button>edit</button></i>
                 </a>
             </div>
             <div>
-              <a href="/delete-contact/?id=<%= i._id %>">
+              <a href="/delete-todo/?id=<%= i._id %>">
               <button class = "del">del</button>
             </a>
             </div>
@@ -28,11 +29,11 @@
           <% } %>
         <% } %>
     </div>
-    <form action="/create-contact" method="POST">
+    <form action="/create-todo" method="POST">
       <input type="text" name="name" placeholder="Enter Name" required>
       <button type="submit">Add</button>
     </form>
-
+    <% } %>
     <script type="text/javascript" src="/js/home.js"></script>
   </body>
 </html>
