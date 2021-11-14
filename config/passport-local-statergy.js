@@ -1,7 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user')
-var currUserEmail = '';
+// var currUserEmail = '';
 
 //using loacal statergy to find user if he/she is signed-in
 //here we authenticated the user
@@ -18,7 +18,7 @@ passport.use(new LocalStrategy({
         console.log('invalid username or password');
         return done(null, false);
       }
-      currUserEmail = user.email;
+      // currUserEmail = user.email;
       return done(null, user);
     });
   }
@@ -43,4 +43,21 @@ passport.deserializeUser(function(id, done){
   });
 });
 
-module.exports = {passport, currUserEmail};
+//check if the user is authenticated
+
+passport.checkAuthentication = function(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  //if the user is not signed - in
+  return(res.redirect('/sign-in'));
+};
+
+passport.setAuthenticatedUser = function(req, res, next){
+  if(req.isAuthenticated()){
+    res.locals.user = req.user;
+  }
+  next();
+};
+
+module.exports = {passport};

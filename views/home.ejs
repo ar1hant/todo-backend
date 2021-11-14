@@ -8,6 +8,11 @@
   <body>
     <h1 id = "page-heading"><%= title %></h1>
     <% if(currUserEmail != '') {%>
+      <div>
+        <a href="/sign-out">
+          <i><button>Sign Out</button></i>
+        </a>
+      </div>
       <div class = "list">
         <% for(let i of todo_list) { %>
           <% if(i.createdby == currUserEmail) {%>
@@ -28,11 +33,18 @@
           </div>
           <% } %>
         <% } %>
-    </div>
-    <form action="/create-todo" method="POST">
-      <input type="text" name="name" placeholder="Enter Name" required>
-      <button type="submit">Add</button>
-    </form>
+      </div>
+      <form action="/create-todo" method="POST">
+        <input type="text" name="name" placeholder="Enter Name" required>
+        <button type="submit">Add</button>
+      </form>
+    <% } %>
+    <% if(currUserEmail == ''){ %>
+      <div>
+        <a href="/sign-in">
+          <i><button>Sign In</button></i>
+        </a>
+      </div>
     <% } %>
     <script type="text/javascript" src="/js/home.js"></script>
   </body>
