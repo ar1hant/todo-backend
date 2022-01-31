@@ -28,7 +28,7 @@ passport.use(new LocalStrategy({
 // serializing the user i.e. we find the id send it to the cookie then the cookie is sent to the browser
 passport.serializeUser(function(user, done){
   // currUserEmail = user.email;
-  done(null, user.id);
+  return done(null, user.id);
 });
 
 // when it comes back from the browser we need to deserialize it
@@ -57,7 +57,7 @@ passport.setAuthenticatedUser = function(req, res, next){
   if(req.isAuthenticated()){
     res.locals.user = req.user;
   }
-  next();
+  return next();
 };
 
 module.exports = {passport};
