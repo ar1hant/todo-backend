@@ -12,8 +12,9 @@ const passportLocal = require('./config/passport-local-statergy');
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
 // var alert = require('alert');
+const cors = require("cors");
 const { sign_up_func, sign_in_func_1, sign_in_func_2, sign_out_func, main_todos, create_todo, del_todo, home } = require('./controllers/index');
-
+var bodyParser = require('body-parser');
 const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -44,8 +45,13 @@ app.use(passport.session());
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.static('./assets'));
+app.use(cors());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 
-app.get('/', home);
+app.get('/', cors(), home);
 
 app.get('/todos', main_todos);
 
@@ -97,7 +103,12 @@ app.route("/update-todo/")
 });
 
 app.get('/delete-todo', del_todo);
-  
+
+app.post("/post_name", function (req, res) {
+  // console.log("here");
+  console.log(req.body.name);
+});
+
 app.listen(8000, function(err){
   if(err)
     console.log("Error Occured");
