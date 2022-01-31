@@ -52,7 +52,7 @@ const sign_out_func = function(req, res){
   // delete req.user;
   req.logout();
   // console.log(res);
-  return res.redirect('/');
+  return res.redirect('/todos');
 }
 
 const main_todos = function(req, res){
