@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-// const port = 8000;
+const port = process.env.PORT || 8000;
 const db = require('./config/mongoose');
 const todo = require('./models/todo');
 const cookieParser = require('cookie-parser');
@@ -109,7 +109,7 @@ app.post("/post_name", function (req, res) {
   console.log(req.body.name);
 });
 
-app.listen(8000, function(err){
+app.listen(port, function(err){
   if(err)
     console.log("Error Occured");
   else
