@@ -11,7 +11,6 @@ const passportLocal = require('../config/passport-local-statergy');
 // const MongoStore = require('connect-mongo');
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
-var alert = require('alert');
 
 const sign_up_func = function(req, res){
   if(req.body.password != req.body.confirm_password){
