@@ -50,7 +50,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-const { sign_up_func, sign_in_func_1, sign_in_func_2, sign_out_func, main_todos, create_todo, del_todo, home } = require('./controllers/index');
+const { sign_up_func, sign_in_func, sign_out_func, main_todos, create_todo, del_todo, home } = require('./controllers/index');
 
 app.get('/', cors(), home);
 
@@ -66,7 +66,10 @@ app.get('/sign-in', function(req, res){
 
 app.post('/create', sign_up_func);
 
-app.post('/create-session', sign_in_func_1, sign_in_func_2);
+app.post('/create-session', passport.authenticate(
+    'local',
+    {failureRedirect: '/sign-up'},
+  ), sign_in_func_2);
 
 app.get('/sign-out', sign_out_func);
 
@@ -114,5 +117,5 @@ app.listen(port, function(err){
   if(err)
     console.log("Error Occured");
   else
-    console.log("Server Running on port: ", 8000);
+    console.log("Server Running on port: ", port);
 });

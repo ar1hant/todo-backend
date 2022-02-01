@@ -38,15 +38,8 @@ const sign_up_func = function(req, res){
   });
 }
 
-const sign_in_func_1 = passport.authenticate(
-  'local',
-  {failureRedirect: '/sign-up'},
-)
-
-const sign_in_func_2 = function(req, res){
-  console.log("here");
-  return res.redirect('/todos');
-  // return res.render('profile.ejs', {name: req.body.name, email: req.body.email});
+const sign_in_func = function(req, res){
+  return res.render('profile.ejs', {name: req.body.name, email: req.body.email});
 };
 
 const sign_out_func = function(req, res){
@@ -121,4 +114,4 @@ const home = function(req, res){
   return res.redirect('/todos');
 }
 
-module.exports = {sign_up_func, sign_in_func_1, sign_in_func_2, sign_out_func, main_todos, create_todo, del_todo, home};
+module.exports = {sign_up_func, sign_in_func, sign_out_func, main_todos, create_todo, del_todo, home};
