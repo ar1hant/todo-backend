@@ -13,7 +13,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
 // var alert = require('alert');
 const cors = require("cors");
-const { sign_up_func, sign_in_func_1, sign_in_func_2, sign_out_func, main_todos, create_todo, del_todo, home } = require('./controllers/index');
+
 var bodyParser = require('body-parser');
 const app = express();
 app.set('view engine', 'ejs');
@@ -50,6 +50,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
+const { sign_up_func, sign_in_func_1, sign_in_func_2, sign_out_func, main_todos, create_todo, del_todo, home } = require('./controllers/index');
 
 app.get('/', cors(), home);
 
