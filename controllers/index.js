@@ -44,7 +44,8 @@ const sign_in_func_1 = passport.authenticate(
 )
 
 const sign_in_func_2 = function(req, res){
-  return res.render('profile.ejs', {name: req.body.name, email: req.body.email});
+  return res.redirect('/todos');
+  // return res.render('profile.ejs', {name: req.body.name, email: req.body.email});
 };
 
 const sign_out_func = function(req, res){
