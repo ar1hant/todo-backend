@@ -69,7 +69,7 @@ app.post('/create', sign_up_func);
 app.post('/create-session', passport.authenticate(
     'local',
     {failureRedirect: '/sign-up'},
-  ), sign_in_func_2);
+  ), sign_in_func);
 
 app.get('/sign-out', sign_out_func);
 
